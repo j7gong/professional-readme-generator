@@ -46,8 +46,8 @@ ${renderBagde(templateData.license)}
     ${templateData.test}
 
 ## Questions
-    Please reach out to me via methods below if you have any questions. 
-    Github Profile: https://github.com/${templateData.name},
-    Email: ${templateData.email}
+    Please reach out to me via Email, ${templateData.email} if you have any questions. 
+[Github Profile](https://github.com/${templateData.name})
+ 
     `;
 };
