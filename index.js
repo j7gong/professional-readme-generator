@@ -1,15 +1,20 @@
 const inquirer = require('inquirer');
 const generatePage = require('./src/page-template');
-const {writeFile, copyFile } = require('./utils/generateMarkdown.js');
-
+const { generateMarkdown } = require('./utils/generateMarkdown.js');
+const fs = require('fs');
 // TODO: Create an array of questions for user input
 // const questions = [];
-const promptUser = () => {
+const promptUser = projectData => {
     console.log(`
     =================
     Let's add a professional README file!
     =================
     `);
+
+    // If there's no 'projects' array property, create one
+    if (!projectData) {
+        projectData = [];
+    }
     return inquirer.prompt([
         {
             type: 'input',
@@ -87,12 +92,31 @@ const promptUser = () => {
             type: 'list',
             name: 'license',
             message: ' What license you would like to choose?',
-            choices: ['MIT License', 'Apache License 2.0', 'Boost Software License 1.0']
+            choices: ['None', 'MIT License', 'Apache License 2.0', 'Boost Software License 1.0']
         }
-      ]);
+      ])
+      .then(data => {
+        projectData.push(data);
+        return projectData;
+      });
 };
 
-promptUser();
+promptUser()
+    .then(projectData => {
+        const pageMD = generatePage(projectData);
+        
+        fs.writeFile('./dist/readme.md', pageMD, err => {
+            if (err) throw new Error(err);
+            console.log("Readme File created!");
+        })
+        // return generatePage(projectData);
+    })
+    // .then(readmeMD => {
+    //     return generateMarkdown(readmeMD);
+    // })
+    // .catch(err => {
+    //     console.log(err);
+    // });
 
 // TODO: Create a function to write README file
 // function writeToFile(fileName, data) {}
