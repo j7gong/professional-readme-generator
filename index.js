@@ -2,8 +2,7 @@ const inquirer = require('inquirer');
 const generatePage = require('./src/page-template');
 const { generateMarkdown } = require('./utils/generateMarkdown.js');
 const fs = require('fs');
-// TODO: Create an array of questions for user input
-// const questions = [];
+
 const promptUser = projectData => {
     console.log(`
     =================
@@ -108,14 +107,9 @@ promptUser()
     .then(pageMD => {
         return generateMarkdown(pageMD);
     })
+    .then(writeFileResponse => {
+        console.log(writeFileResponse);
+    })
     .catch(err => {
         console.log(err);
     });
-    // .then(projectData => {
-    //     const pageMD = generatePage(projectData);
-        
-    //     fs.writeFile('./dist/readme.md', pageMD, err => {
-    //         if (err) throw new Error(err);
-    //         console.log("Readme File created!");
-    //     })
-    // })
