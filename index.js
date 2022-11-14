@@ -103,26 +103,19 @@ const promptUser = projectData => {
 
 promptUser()
     .then(projectData => {
-        const pageMD = generatePage(projectData);
-        
-        fs.writeFile('./dist/readme.md', pageMD, err => {
-            if (err) throw new Error(err);
-            console.log("Readme File created!");
-        })
-        // return generatePage(projectData);
+        return generatePage(projectData);
     })
-    // .then(readmeMD => {
-    //     return generateMarkdown(readmeMD);
+    .then(pageMD => {
+        return generateMarkdown(pageMD);
+    })
+    .catch(err => {
+        console.log(err);
+    });
+    // .then(projectData => {
+    //     const pageMD = generatePage(projectData);
+        
+    //     fs.writeFile('./dist/readme.md', pageMD, err => {
+    //         if (err) throw new Error(err);
+    //         console.log("Readme File created!");
+    //     })
     // })
-    // .catch(err => {
-    //     console.log(err);
-    // });
-
-// TODO: Create a function to write README file
-// function writeToFile(fileName, data) {}
-
-// TODO: Create a function to initialize app
-// function init() {}
-
-// Function call to initialize app
-// init();

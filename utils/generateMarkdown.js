@@ -33,4 +33,4 @@ const generateMarkdown = fileContent => {
   });
 };
 
-module.exports = generateMarkdown;
+module.exports = {generateMarkdown};
