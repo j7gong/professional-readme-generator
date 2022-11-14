@@ -70,7 +70,7 @@ const promptUser = projectData => {
         {
             type: 'input',
             name: 'installation',
-            message: 'Enter installationn instruction for your project'
+            message: 'Enter installation instruction for your project'
         },
         {
             type: 'input',
